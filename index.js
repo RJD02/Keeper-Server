@@ -5,11 +5,16 @@ const mongoose = require("mongoose");
 const routes = require("./routes/routes");
 const app = express();
 
+console.log(process.env.PORT, process.env.DB_USERNAME, process.env.DB_PASSWORD);
+
 mongoose
-    .connect(process.env.CONNECTION_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(
+        `mongodb+srv://admin-${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.lkxsz.mongodb.net/?retryWrites=true&w=majority`,
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        }
+    )
     .then(() => {
         console.log("MONGO CONNECTION OPEN");
     })
